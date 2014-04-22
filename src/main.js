@@ -2,7 +2,7 @@
  * Generate a GUID
  * Code golf from: https://gist.github.com/jed/982883
  */
-module.exports = function b(a) {
+exports = module.exports = function b(a) {
   return a ?          // if the placeholder was passed, return
     (                 // a random number from 0 to 15
       a ^             // unless b is 8,
@@ -20,4 +20,17 @@ module.exports = function b(a) {
       /[018]/g,       // zeroes, ones, and eights with
       b               // random hex digits
     );
+};
+
+/**
+ * Given a GUID, return a string containing it that can be used
+ * as an HTML attribute like an id or class
+ * Notably, HTML4 IDs should not start with numbers, and neither should
+ * CSS classes
+ */
+exports.htmlAttr = function(guid) {
+    if ( ! guid) {
+        throw "Not a GUID: "+guid;
+    }
+    return 'guid-'+guid;
 };
